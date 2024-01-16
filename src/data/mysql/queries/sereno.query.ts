@@ -15,5 +15,6 @@ export const serenoQuery = {
   updateSerenoById: `
     UPDATE sereno 
     SET dni = ? ,nombre = ? ,apellidos = ? ,genero = ? ,celular = ? ,correo = ? ,direccion = ? ,nacimiento = ?
-    WHERE id_sereno = ?;`,
+    WHERE id_sereno = ?;`, 
+      deleteSerenoById: `DELETE FROM sereno WHERE id_sereno = ?`,
 };

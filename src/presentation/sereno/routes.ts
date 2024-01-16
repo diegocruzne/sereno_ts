@@ -11,10 +11,9 @@ export class SerenoRoutes {
     router.post("/", controller.createSereno);
     router.get("/:id", controller.getSerenoById);
     router.put("/:id", controller.updateSerenoById);
-    //router.get("/", controller.deleteSereno);
-    router.put("/patrullaje", controller.updateSerenoFkPatrullaje);
-    //router.get("/", controller.deleteSerenoById);
+    router.put("/", controller.updateSerenoFkPatrullaje);
+    router.delete("/:id", controller.deleteSerenoById); 
 
-    return router;
+    return router; 
   }
 }

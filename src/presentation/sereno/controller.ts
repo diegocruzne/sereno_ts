@@ -133,6 +133,12 @@ export class SerenoController {
   };
 
   deleteSerenoById = async (req: Request, res: Response) => {
-    res.json("deleteSerenoById");
+    const { id } = req.params;
+
+    const conn = await this.connectionMysql.connection();
+
+    const [response] = await conn.query(serenoQuery.deleteSerenoById, id);
+
+    res.sendStatus(204);
   };
 }
