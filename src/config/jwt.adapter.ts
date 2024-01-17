@@ -13,4 +13,14 @@ export class JwtAdapter {
       });
     });
   }
+
+  static async verifyToken(token: string) {
+    return new Promise((resolve) => {
+      jwt.verify(token, JWT_SEED, (err, decoded) => {
+        if (err) return resolve(null);
+
+        resolve(decoded);
+      });
+    });
+  }
 }
