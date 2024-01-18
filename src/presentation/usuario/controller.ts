@@ -52,7 +52,8 @@ export class UsuarioController {
         ]
       );
 
-      if (result.affectedRows === 1) {
+      if (result.affectedRows === 1) {  
+        await conn.end();
         return res.json({
           ok: true,
           msg: "Usuario actualizado!",
@@ -107,6 +108,7 @@ export class UsuarioController {
       );
 
       if (result.affectedRows === 1) {
+        await conn.end();
         return res.json({
           ok: true,
           msg: "Usuario actualizado!",
@@ -157,6 +159,7 @@ export class UsuarioController {
       );
 
       if (resultUpdate.affectedRows === 1) {
+        await conn.end();
         return res.json({
           ok: true,
           msg: "Contraseña actualizada",
@@ -196,6 +199,7 @@ export class UsuarioController {
       );
 
       if (verifyDate.length > 0) {
+        await conn.end();
         return res.status(400).json({
           ok: false,
           msg: "Dni, correo o celular ya existen",
@@ -238,12 +242,72 @@ export class UsuarioController {
   };
 
   getUsers = async (req: CustomRequest, res: Response) => {
-    res.json("getUsers");
+    try {
+      const conn = await this.connectionMysql.connection();
+
+      const [result] = await conn.query(usuarioQuery.getAllUsers);
+
+      res.json(result);
+      await conn.end();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Error inesperado",
+      });
+    }
   };
+
   getUserById = async (req: CustomRequest, res: Response) => {
-    res.json("getUserById");
+    try {
+      const { id } = req.params;
+
+      const conn = await this.connectionMysql.connection();
+
+      const [result] = (await conn.query(usuarioQuery.getUserById2, id)) as any;
+
+      res.json(result[0]);
+      await conn.end();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        ok: false,
+        msg: "Error inesperado",
+      });
+    }
   };
+
   getUserByDni = async (req: CustomRequest, res: Response) => {
-    res.json("getUserByDni");
+    try {
+      const { dni } = req.params;
+
+      const conn = await this.connectionMysql.connection();
+
+      const [result] = (await conn.query(
+        usuarioQuery.getUserByDni,
+        dni
+      )) as Array<any>;
+
+      if (result.length === 0) {
+        await conn.end();
+        return res.status(200).json({
+          ok: false,
+          msg: "Usuario no encontrado",
+        });
+      }
+
+      res.json({
+        ok: true,
+        msg: "Usuario encontrado",  
+        usuario: result[0],
+      });
+      await conn.end();
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        ok: false,
+        msg: "Ocurrió un error",
+      });
+    }
   };
 }

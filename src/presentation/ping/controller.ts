@@ -18,7 +18,8 @@ export class PingController {
         FROM information_schema.tables 
         GROUP BY table_schema;`
       );
-      res.json(response);
+       res.json(response);
+      // res.json(envs.DB_DATABASE);
 
       await conn.end();
     } catch (error) {

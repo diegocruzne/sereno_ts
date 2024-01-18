@@ -83,6 +83,7 @@ export class AuthController {
         token,
         usuario: usuario[0],
       });
+      await conn.end();
     } catch (error) {
       console.log(error);
       res.status(500).json({

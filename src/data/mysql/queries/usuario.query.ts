@@ -25,4 +25,18 @@ export const usuarioQuery = {
       UPDATE usuario 
       SET contrasena = ? 
       WHERE id_usuario = ?`,
+  getAllUsers: `
+    SELECT id_usuario, dni, nombre, apellido, nacimiento, contrasena, correo, 
+      direccion, telefono, sexo, adicional, foto, fk_tipo_us 
+    FROM usuario;`,
+  getUserById2: `
+    SELECT id_usuario, dni, nombre, apellido, nacimiento, contrasena, 
+      correo, direccion, telefono, sexo, adicional, foto, fk_tipo_us
+    FROM usuario
+    WHERE id_usuario = ?;`,
+  getUserByDni: `
+    SELECT id_usuario, dni, nombre, apellido, nacimiento, contrasena, 
+      correo, direccion, telefono, sexo, adicional, foto, fk_tipo_us
+    FROM usuario
+    WHERE dni = ?`,
 };

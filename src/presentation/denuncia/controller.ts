@@ -35,6 +35,7 @@ export class DenunciaController {
         total: total[0].total,
         denuncias: detailDenuncias,
       });
+      await conn.end();
     } catch (error) {
       console.log(error);
       return res.status(500).json({
@@ -64,6 +65,7 @@ export class DenunciaController {
         total: total[0].total,
         denuncias: result,
       });
+      await conn.end();
     } catch (error) {
       console.log(error);
       return res.status(500).json({
