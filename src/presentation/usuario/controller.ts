@@ -309,5 +309,6 @@ export class UsuarioController {
         msg: "Ocurrió un error",
       });
     }
-  };
+  }; 
 }
+ 

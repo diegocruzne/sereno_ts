@@ -6,6 +6,8 @@ import { SerenoRoutes } from "./sereno/routes";
 import { DelitoRoutes } from "./delito/routes";
 import { DenunciaRoutes } from "./denuncia/routes";
 import { UsuarioRoutes } from "./usuario/routes";
+import { PatrullajeRoutes } from "./patrullaje/routes";
+import { UnidadRoutes } from "./unidad/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -18,6 +20,8 @@ export class AppRoutes {
     router.use("/api/delito", DelitoRoutes.routes);
     router.use("/api/denuncia", DenunciaRoutes.routes);
     router.use("/api/usuarios", UsuarioRoutes.routes);
+    router.use("/api/patrullaje", PatrullajeRoutes.routes);
+    router.use("/api/unidades", UnidadRoutes.routes);
 
     return router;
   }

@@ -27,7 +27,7 @@ export class DenunciaController {
         [offset, limitNumber]
       );
 
-      const [total] = await conn.query<totalDenuncias[]>(
+      const [total] = await conn.query<totalDenuncias[]>(   
         denunciaQuery.getNumTotalDenuncias
       );
 

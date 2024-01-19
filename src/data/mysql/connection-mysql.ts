@@ -13,10 +13,9 @@ export class ConnectionMysql {
   public async connection() {
     try {
       const conn = await mysql.createConnection(this.data);
-      //console.log("Connected to MySQL");
       return conn;
     } catch (error) {
-      console.error("Error connecting to MySQL: ", error);
+      console.error("Error connecting to MySQL: ", error); 
       throw error;
     }
   }
