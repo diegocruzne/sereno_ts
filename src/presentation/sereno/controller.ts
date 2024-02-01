@@ -58,6 +58,8 @@ export class SerenoController {
       direccion,
       nacimiento,
     });
+
+    await conn.end();
   };
 
   getSerenoById = async (req: Request, res: Response) => {
@@ -71,6 +73,7 @@ export class SerenoController {
     )) as Array<any>;
 
     res.json(response[0]);
+    await conn.end();
   };
 
   updateSerenoById = async (req: Request, res: Response) => {
@@ -110,6 +113,8 @@ export class SerenoController {
       direccion,
       nacimiento,
     });
+
+    await conn.end();
   };
 
   deleteSereno = async (req: Request, res: Response) => {
@@ -130,6 +135,8 @@ export class SerenoController {
       ok: true,
       msg: "Sereno actualizado",
     });
+
+    await conn.end();
   };
 
   deleteSerenoById = async (req: Request, res: Response) => {
@@ -140,5 +147,7 @@ export class SerenoController {
     const [response] = await conn.query(serenoQuery.deleteSerenoById, id);
 
     res.sendStatus(204);
+
+    await conn.end();
   };
 }

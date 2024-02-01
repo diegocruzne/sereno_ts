@@ -8,6 +8,7 @@ import { DenunciaRoutes } from "./denuncia/routes";
 import { UsuarioRoutes } from "./usuario/routes";
 import { PatrullajeRoutes } from "./patrullaje/routes";
 import { UnidadRoutes } from "./unidad/routes";
+import { WsPatrullajeRoutes } from "./ws-patrullaje/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -22,6 +23,7 @@ export class AppRoutes {
     router.use("/api/usuarios", UsuarioRoutes.routes);
     router.use("/api/patrullaje", PatrullajeRoutes.routes);
     router.use("/api/unidades", UnidadRoutes.routes);
+    router.use("/api/ws-patrullaje", WsPatrullajeRoutes.routes);
 
     return router;
   }
