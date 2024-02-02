@@ -1,6 +1,8 @@
 import express, { Router } from "express";
 import path from "path";
 import cors from "cors";
+import { WebSocketServer } from "ws";
+import { Wsocket } from "./wsocket";
 
 interface Options {
   port: number;
@@ -47,6 +49,9 @@ export class Server {
     this.serverListener = this.app.listen(this.port, () => {
       console.log(`Server running on port! ${this.port}`);
     });
+
+    const wsocket = new Wsocket(this.serverListener);
+    wsocket.start();
   }
 
   public close() {
