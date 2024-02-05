@@ -17,6 +17,8 @@ export class DelitoController {
     const formattedData: any = this.formatData(results);
 
     res.send(formattedData);
+
+    await conn.end();
   };
 
   formatData = (results: any) => {

@@ -199,14 +199,15 @@ CREATE TABLE denuncia(
     patrullaje_fk INT NULL REFERENCES patrullaje(id_patrullaje)
 );
 
+ALTER TABLE denuncia ADD estado VARCHAR(50) NOT NULL;
+
 INSERT INTO denuncia (detalles, direccion, fecha, delito_fk, denunciante_fk, usuario_fk, patrullaje_fk, lat, lng)
 VALUES
 ('Robo de celular', 'Calle 10 # 20-30',  '2023-12-01 18:00:00', 1, NULL, 1, NULL, -6.771574591486471, -79.83866337221008);
 
-
 SELECT * FROM denuncia order by id_denuncia desc;
 
-UPDATE denuncia SET  fecha = '2023-11-28 13:59:00' WHERE id_denuncia = 38;
+UPDATE denuncia SET estado = 'atendido' WHERE id_denuncia = 67;
 
 
 

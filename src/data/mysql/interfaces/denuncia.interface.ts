@@ -6,6 +6,7 @@ export interface DenunciaDetail extends RowDataPacket {
   hora: string;
   delito: string;
   dni: string;
+  estado: string
 }
 
 export interface totalDenuncias extends RowDataPacket {

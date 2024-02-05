@@ -1,7 +1,7 @@
 export const denunciaQuery = {
   getDetalleDenuncias: `
     SELECT id_denuncia, DATE(fecha) AS fecha, DATE_FORMAT(fecha, '%H:%i') AS hora, 
-        delito.delito AS delito, persona.dni
+        delito.delito AS delito, persona.dni, estado
     FROM denuncia 
     INNER JOIN delito ON denuncia.delito_fk = delito.id_delito
     LEFT JOIN persona ON denuncia.denunciante_fk = persona.id_persona
@@ -19,4 +19,8 @@ export const denunciaQuery = {
     `,
 
   totalDenunciasByDate: `SELECT COUNT(*) AS total FROM denuncia WHERE DATE_FORMAT(fecha, '%d-%m-%y') = ?;`,
+  registrarDenuncia: `
+  INSERT INTO denuncia (detalles, direccion, fecha, delito_fk, denunciante_fk, usuario_fk, patrullaje_fk, lat, lng, estado)
+  VALUES
+  (? , ?, ?, ?, ?, ?, ?, ?, ?, "ingresado");`,
 };

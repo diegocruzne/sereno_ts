@@ -7,6 +7,7 @@ import {
   totalDenuncias,
 } from "../../data/mysql/interfaces/denuncia.interface";
 import { CustomRequest } from "../../data/mysql/interfaces/custom-request.interface";
+import { ResultSetHeader } from "mysql2";
 
 export class DenunciaController {
   private readonly connectionMysql = new ConnectionMysql();
@@ -75,7 +76,32 @@ export class DenunciaController {
     }
   };
 
-  registrarDenuncia = async (req: CustomRequest, res: Response) => {
-    res.json(req.id);
+  registrarDenuncia = async (req: Request, res: Response) => {
+    const { detalles, direccion, lat, lng, fecha, delito, denunciante, usuario, patrullaje } = req.body;
+
+    try {
+      const conn = await this.connectionMysql.connection();
+
+      const [result] = await conn.query<ResultSetHeader>(
+        denunciaQuery.registrarDenuncia, 
+        [detalles, direccion, fecha, delito, denunciante, usuario, patrullaje, lat, lng]
+      );
+
+      if (result.affectedRows === 1) {
+        res.json({
+          ok: true,
+          msg: "Denuncia registrada",
+          idDenuncia: result.insertId,
+        });
+      } else throw new Error('Error al registar la denuncia') 
+
+      await conn.end();
+    } catch (error) {
+      res.status(500).json({
+        ok: false,
+        msg: `Hubo un error: ${error}`
+      });
+    };
+    
   };
 }
